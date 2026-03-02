@@ -48,7 +48,17 @@ class HomeState extends State<Home> {
       h1([.text('Welcome')]),
       p([.text('You successfully create a new Jaspr site.')]),
       div(styles: Styles(height: 100.px), []),
-      BlocProvider<CounterBloc>(bloc: counterBloc, child: const Counter()),
+      BlocProvider<CounterBloc>(
+        bloc: counterBloc,
+        child: section([
+          const Counter(),
+          BlocListener<CounterBloc, CounterState>(
+            listener: (context, state) {
+              print('Counter updated: ${state.counter}');
+            },
+          ),
+        ]),
+      ),
       // const Counter(),
     ]);
   }
