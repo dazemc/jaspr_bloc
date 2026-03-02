@@ -1,19 +1,16 @@
-import 'package:bloc/bloc.dart';
-import 'package:jaspr/jaspr.dart';
+import 'package:jaspr_bloc/jaspr_bloc.dart';
 
 class BlocProvider<T extends BlocBase<Object?>> extends StatefulComponent {
   final T bloc;
   final Component child;
-  const BlocProvider({
-    required this.bloc,
-    required this.child,
-  });
+  const BlocProvider({required this.bloc, required this.child});
 
   @override
   State<BlocProvider<T>> createState() => _BlocProviderState<T>();
 
   static T of<T extends BlocBase<Object?>>(BuildContext context) {
-    final inherited = context.dependOnInheritedComponentOfExactType<_BlocInherited<T>>();
+    final inherited = context
+        .dependOnInheritedComponentOfExactType<_BlocInherited<T>>();
     if (inherited == null) {
       throw Exception('No BlocProvider<$T> found in context');
     }
@@ -21,7 +18,8 @@ class BlocProvider<T extends BlocBase<Object?>> extends StatefulComponent {
   }
 }
 
-class _BlocProviderState<T extends BlocBase<Object?>> extends State<BlocProvider<T>> {
+class _BlocProviderState<T extends BlocBase<Object?>>
+    extends State<BlocProvider<T>> {
   @override
   void dispose() {
     component.bloc.close();
@@ -30,10 +28,7 @@ class _BlocProviderState<T extends BlocBase<Object?>> extends State<BlocProvider
 
   @override
   Component build(BuildContext context) {
-    return _BlocInherited<T>(
-      bloc: component.bloc,
-      child: component.child,
-    );
+    return _BlocInherited<T>(bloc: component.bloc, child: component.child);
   }
 }
 

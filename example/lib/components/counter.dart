@@ -1,7 +1,4 @@
-import 'dart:async';
-
 import 'package:jaspr/dom.dart';
-import 'package:jaspr/jaspr.dart';
 import 'package:jaspr_bloc_example/bloc/counter_bloc.dart';
 import 'package:jaspr_bloc/jaspr_bloc.dart';
 
@@ -11,47 +8,61 @@ class Counter extends StatefulComponent {
   const Counter({super.key});
 
   @override
-  State<Counter> createState() => CounterState();
+  State<Counter> createState() => CounterComponentState();
 }
 
-class CounterState extends State<Counter> {
+class CounterComponentState extends State<Counter> {
   late final CounterBloc bloc;
-  late final StreamSubscription sub;
+  // late final StreamSubscription sub;
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  void initState() {
     bloc = BlocProvider.of<CounterBloc>(context);
-    sub = bloc.stream.listen((_) {
-      setState(() {});
-    });
-  }
-
-  @override
-  void dispose() {
-    bloc.close();
-    super.dispose();
+    super.initState();
   }
 
   @override
   Component build(BuildContext context) {
-    return div([
-      div(classes: 'counter', [
-        button(
-          onClick: () {
-            bloc.add(CounterDecrementPressed());
-          },
-          [.text('-')],
-        ),
-        span([.text('${bloc.state.counter}')]),
-        button(
-          onClick: () {
-            bloc.add(CounterIncrementPressed());
-          },
-          [.text('+')],
-        ),
-      ]),
-    ]);
+    return BlocBuilder<CounterBloc, CounterState>(
+      bloc: bloc,
+      builder: (context, count) {
+        return div([
+          div(classes: 'counter', [
+            button(
+              onClick: () {
+                bloc.add(CounterDecrementPressed());
+              },
+              [.text('-')],
+            ),
+            span([.text('${bloc.state.counter}')]),
+            button(
+              onClick: () {
+                bloc.add(CounterIncrementPressed());
+              },
+              [.text('+')],
+            ),
+          ]),
+        ]);
+      },
+    );
+
+    // div([
+    //   div(classes: 'counter', [
+    //     button(
+    //       onClick: () {
+    //         bloc.add(CounterDecrementPressed());
+    //       },
+    //       [.text('-')],
+    //     ),
+    //     span([.text('${bloc.state.counter}')]),
+    //     button(
+    //       onClick: () {
+    //         bloc.add(CounterIncrementPressed());
+    //       },
+    //       [.text('+')],
+    //     ),
+    //   ]),
+    // ]);
   }
 
   @css

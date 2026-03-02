@@ -34,7 +34,7 @@ ServerOptions get defaultServerOptions => ServerOptions(
     _home.Home: ClientTarget<_home.Home>('home'),
   },
   styles: () => [
-    ..._counter.CounterState.styles,
+    ..._counter.CounterComponentState.styles,
     ..._header.Header.styles,
     ..._about.About.styles,
     ..._app.App.styles,
