@@ -1,0 +1,17 @@
+name: jaspr_bloc
+description: essentially just a fork of flutter_bloc with jaspr components
+version: 0.0.1
+# repository: https://github.com/dazemc/jaspr_bloc
+
+environment:
+  sdk: ^3.11.0
+
+# Add regular dependencies here.
+dependencies:
+  bloc: ^9.2.0
+  jaspr: ^0.22.3
+  # path: ^1.9.0
+
+dev_dependencies:
+  lints: ^6.0.0
+  test: ^1.25.6
