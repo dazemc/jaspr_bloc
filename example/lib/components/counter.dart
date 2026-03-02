@@ -25,7 +25,7 @@ class CounterComponentState extends State<Counter> {
   Component build(BuildContext context) {
     return BlocBuilder<CounterBloc, CounterState>(
       bloc: bloc,
-      builder: (context, count) {
+      builder: (context, state) {
         return div([
           div(classes: 'counter', [
             button(
@@ -34,7 +34,7 @@ class CounterComponentState extends State<Counter> {
               },
               [.text('-')],
             ),
-            span([.text('${bloc.state.counter}')]),
+            span([.text('${state.counter}')]),
             button(
               onClick: () {
                 bloc.add(CounterIncrementPressed());
@@ -45,24 +45,6 @@ class CounterComponentState extends State<Counter> {
         ]);
       },
     );
-
-    // div([
-    //   div(classes: 'counter', [
-    //     button(
-    //       onClick: () {
-    //         bloc.add(CounterDecrementPressed());
-    //       },
-    //       [.text('-')],
-    //     ),
-    //     span([.text('${bloc.state.counter}')]),
-    //     button(
-    //       onClick: () {
-    //         bloc.add(CounterIncrementPressed());
-    //       },
-    //       [.text('+')],
-    //     ),
-    //   ]),
-    // ]);
   }
 
   @css
