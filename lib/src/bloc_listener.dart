@@ -20,8 +20,8 @@ abstract class BlocListenerBase<B extends BlocBase<S>, S>
     super.key,
     this.bloc,
     this.listenWhen,
-    Component? child,
-  }) : super(child: child);
+    super.child,
+  });
 
   final B? bloc;
   final BlocComponentListener<S> listener;

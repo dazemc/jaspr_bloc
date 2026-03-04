@@ -23,8 +23,11 @@ class CounterComponentState extends State<Counter> {
 
   @override
   Component build(BuildContext context) {
-    return BlocBuilder<CounterBloc, CounterState>(
-      bloc: bloc,
+    return BlocConsumer<CounterBloc, CounterState>(
+      listenWhen: (previous, current) => (current.counter.isEven) ? true : false,
+      listener: (context, state) {
+        print('Counter is even');
+      },
       builder: (context, state) {
         return div([
           div(classes: 'counter', [
@@ -45,6 +48,28 @@ class CounterComponentState extends State<Counter> {
         ]);
       },
     );
+    // return BlocBuilder<CounterBloc, CounterState>(
+    //   bloc: bloc,
+    //   builder: (context, state) {
+    //     return div([
+    //       div(classes: 'counter', [
+    //         button(
+    //           onClick: () {
+    //             bloc.add(CounterDecrementPressed());
+    //           },
+    //           [.text('-')],
+    //         ),
+    //         span([.text('${state.counter}')]),
+    //         button(
+    //           onClick: () {
+    //             bloc.add(CounterIncrementPressed());
+    //           },
+    //           [.text('+')],
+    //         ),
+    //       ]),
+    //     ]);
+    //   },
+    // );
   }
 
   @css

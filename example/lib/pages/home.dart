@@ -1,5 +1,4 @@
 import 'package:jaspr/dom.dart';
-import 'package:jaspr/jaspr.dart';
 import 'package:jaspr_bloc_example/bloc/counter_bloc.dart';
 import 'package:jaspr_bloc/jaspr_bloc.dart';
 
@@ -52,11 +51,6 @@ class HomeState extends State<Home> {
         bloc: counterBloc,
         child: section([
           const Counter(),
-          BlocListener<CounterBloc, CounterState>(
-            listener: (context, state) {
-              print('Counter updated: ${state.counter}');
-            },
-          ),
         ]),
       ),
       // const Counter(),
